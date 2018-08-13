@@ -33,6 +33,7 @@ public class SlackChatImpl implements SlackChat {
     @Override
     public void delete(String channelId, String ts, Boolean asUser, Handler<AsyncResult<Void>> handler) {
         HttpRequest<Buffer> req = webClient.post(ApiConstant.Chat.DELETE);
+        req.setQueryParam("token", options.getToken());
         req.setQueryParam("channel", channelId);
         req.setQueryParam("ts", ts);
         if(null != asUser) req.setQueryParam("as_user", asUser.toString());
@@ -42,6 +43,7 @@ public class SlackChatImpl implements SlackChat {
     @Override
     public void getPermalink(String channelId, String ts, Handler<AsyncResult<String>> handler) {
         HttpRequest<Buffer> req = webClient.get(ApiConstant.Chat.GET_PERMALINK);
+        req.setQueryParam("token", options.getToken());
         req.setQueryParam("channel", channelId);
         req.setQueryParam("message_ts", ts);
         sendAndReceivePrimitive(req, "permalink", handler, String.class);
@@ -50,6 +52,7 @@ public class SlackChatImpl implements SlackChat {
     @Override
     public void meMessage(String channelId, String text, Handler<AsyncResult<String>> handler) {
         HttpRequest<Buffer> req = webClient.post(ApiConstant.Chat.POST_EPHEMERAL);
+        req.setQueryParam("token", options.getToken());
         req.setQueryParam("channel", channelId);
         req.setQueryParam("text", text);
         sendAndReceivePrimitive(req, "message_ts", handler, String.class);
@@ -59,6 +62,7 @@ public class SlackChatImpl implements SlackChat {
     public void postEphemeral(String channelId, String text, String userId, Boolean asUser, String attachments,
                               Boolean linkNames, String parse, Handler<AsyncResult<String>> handler) {
         HttpRequest<Buffer> req = webClient.post(ApiConstant.Chat.POST_EPHEMERAL);
+        req.setQueryParam("token", options.getToken());
         req.setQueryParam("channel", channelId);
         req.setQueryParam("text", text);
         req.setQueryParam("user", userId);
@@ -75,6 +79,7 @@ public class SlackChatImpl implements SlackChat {
                             String threadTs, Boolean urfurlLinks, Boolean unfurlMedia, String username,
                             Handler<AsyncResult<Message>> handler) {
         HttpRequest<Buffer> req = webClient.post(ApiConstant.Chat.POST_MESSAGE);
+        req.setQueryParam("token", options.getToken());
         req.setQueryParam("channel", channelId);
         req.setQueryParam("text", text);
         if(null != asUser) req.setQueryParam("as_user", asUser.toString());
@@ -88,7 +93,7 @@ public class SlackChatImpl implements SlackChat {
         if(!StringUtil.isNullOrEmpty(threadTs)) req.setQueryParam("thread_ts", threadTs);
         if(null != urfurlLinks) req.setQueryParam("unfurl_links", urfurlLinks.toString());
         if(null != unfurlMedia) req.setQueryParam("unfurl_media", unfurlMedia.toString());
-        if(null != username.toString()) req.setQueryParam("username", username);
+        if(!StringUtil.isNullOrEmpty(username)) req.setQueryParam("username", username);
         sendAndReceiveOne(req, "message", handler, Message.class);
     }
 

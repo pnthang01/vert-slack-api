@@ -104,6 +104,7 @@ public class SlackConversationsImpl implements SlackConversations {
     public void list(String cursor, Boolean excludeArchived, Boolean excludeMembers, Integer limit,
                      Handler<AsyncResult<Multi<Channel>>> handler) {
         HttpRequest<Buffer> req = webClient.get(ApiConstant.Conversations.LIST);
+        req.setQueryParam("token", options.getToken());
         if (!StringUtil.isNullOrEmpty(cursor)) req.setQueryParam("cursor", cursor);
         if (null != excludeArchived) req.setQueryParam("exclude_archived", excludeArchived.toString());
         if (null != excludeMembers) req.setQueryParam("exclude_members", excludeMembers.toString());

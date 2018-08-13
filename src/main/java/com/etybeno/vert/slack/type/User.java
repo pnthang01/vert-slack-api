@@ -5,16 +5,11 @@ import io.vertx.core.json.JsonObject;
 /**
  * Created by thangpham on 07/08/2018.
  */
-public class User {
+public class User extends SlackType {
 
-    private JsonObject json;
 
-    public User(JsonObject json) {
-        this.json = json;
-    }
-
-    public User() {
-        this.json = new JsonObject();
+    public User(JsonObject jsonObject) {
+        super(jsonObject);
     }
 
     public String getId() {

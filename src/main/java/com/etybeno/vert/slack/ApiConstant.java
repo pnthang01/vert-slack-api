@@ -52,4 +52,25 @@ public interface ApiConstant {
         String UNFURL = "/api/chat.unfurl";
         String UPDATE = "/api/chat.update";
     }
+
+    interface Users {
+        String CONVERSATIONS = "/api/users.conversations";
+        String DELETE_PHOTO = "/api/users.deletePhoto";
+        String GET_PRESENCE = "/api/users.getPresence";
+        String IDENTIFY = "/api/users.identity";
+        String INFO = "/api/users.info";
+        String LIST = "/api/users.list";
+        String LOOKUP_BY_EMAIL = "/api/users.lookupByEmail";
+        String SET_ACTIVE = "/api/users.setActive";
+        String SET_PHOTO = "/api/users.setPhoto";
+        String SET_PRESENCE = "/api/users.setPresence";
+    }
+
+    interface Bot {
+        String BOT_INFO = "/api/bots.info";
+    }
+
+    interface RTM {
+        String RTM_CONNET = "/api/rtm.connect";
+    }
 }

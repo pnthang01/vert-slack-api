@@ -43,7 +43,7 @@ public interface AbstractSlack {
         });
     }
 
-    default <T extends SlackType> void sendAnReceivedMulti(HttpRequest<Buffer> req, String dataKey,
+    default <T extends SlackType> void sendAndReceivedMulti(HttpRequest<Buffer> req, String dataKey,
                                                            Handler<AsyncResult<Multi<T>>> handler, Class<T> clazz) {
         req.send(ar -> {
             if (ar.succeeded()) {
@@ -66,6 +66,7 @@ public interface AbstractSlack {
                 HttpResponse<Buffer> res = ar.result();
                 if (res.statusCode() == 200) {
                     JsonObject object = res.bodyAsJsonObject();
+                    System.out.println(object);
                     if (object.getBoolean("ok")) handler.handle(Future.succeededFuture());
                     else handler.handle(Future.failedFuture(object.getString("error")));
                 } else handler.handle(Future.failedFuture("Unexpected status: " + res.statusCode()));
@@ -89,6 +90,19 @@ public interface AbstractSlack {
             } else {
                 handler.handle(Future.failedFuture(ar.cause()));
             }
+        });
+    }
+
+    default void sendAndReceiveFullObject(HttpRequest<Buffer> req, Handler<AsyncResult<JsonObject>> handler) {
+        req.send(ar -> {
+            if (ar.succeeded()) {
+                HttpResponse<Buffer> res = ar.result();
+                if (res.statusCode() == 200) {
+                    JsonObject object = res.bodyAsJsonObject();
+                    if (object.getBoolean("ok")) handler.handle(Future.succeededFuture(object));
+                    else handler.handle(Future.failedFuture(object.getString("error")));
+                } else handler.handle(Future.failedFuture("Unexpected status: " + res.statusCode()));
+            } else handler.handle(Future.failedFuture(ar.cause()));
         });
     }
 }
