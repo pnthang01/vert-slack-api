@@ -10,7 +10,7 @@ import io.vertx.core.json.JsonObject;
 /**
  * Created by thangpham on 07/08/2018.
  */
-public interface SlackClient extends AbstractSlack {
+public interface SlackClient extends SlackWebApi {
 
     static SlackClient create(Vertx vertx, SlackOptions options) {
         return new SlackClientImpl(vertx, options);
@@ -26,10 +26,13 @@ public interface SlackClient extends AbstractSlack {
 
     SlackUsers users();
 
+    SlackRtm rtm();
+
     void rtmConnect(Boolean batchPresenceAware, Boolean presenceSub, Handler<AsyncResult<JsonObject>> handler);
 
     void rtmStart(Boolean batchPresenceAware, Boolean includeLocale, Boolean mpimAware, Integer noLatest,
-                         Boolean noUnreads, Boolean presenceSub, Boolean simpleLatest, Handler<AsyncResult<JsonObject>> handler);
+                  Boolean noUnreads, Boolean presenceSub, Boolean simpleLatest, Handler<AsyncResult<JsonObject>> handler);
+
 
     void botInfo(String botId, Handler<AsyncResult<Bot>> handler);
 }

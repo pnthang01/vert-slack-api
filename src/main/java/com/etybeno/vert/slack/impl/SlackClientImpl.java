@@ -27,6 +27,8 @@ public class SlackClientImpl implements SlackClient {
     private SlackConversations conversations;
     private SlackChat chat;
     private SlackReminders reminders;
+    private SlackUsers users;
+    private SlackRtm rtm;
 
     public SlackClientImpl(Vertx vertx, SlackOptions options) {
         this.options = new SlackOptions(options);
@@ -54,9 +56,21 @@ public class SlackClientImpl implements SlackClient {
     }
 
     @Override
-    public SlackReminders reminders() {
+    public synchronized SlackReminders reminders() {
         if (null == reminders) reminders = new SlackRemindersImpl(vertx, options);
         return reminders;
+    }
+
+    @Override
+    public synchronized SlackUsers users() {
+        if(null == users) users = new SlackUsersImpl(vertx, options);
+        return users;
+    }
+
+    @Override
+    public synchronized SlackRtm rtm() {
+        if(null == rtm) rtm = new SlackRtmImpl(vertx, options);
+        return rtm;
     }
 
     @Override
@@ -90,6 +104,5 @@ public class SlackClientImpl implements SlackClient {
         req.setQueryParam("bot", botId);
         sendAndReceiveOne(req, "bot", handler, Bot.class);
     }
-
 
 }

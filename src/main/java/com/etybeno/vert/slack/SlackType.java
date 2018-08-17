@@ -1,4 +1,4 @@
-package com.etybeno.vert.slack.type;
+package com.etybeno.vert.slack;
 
 import io.vertx.core.json.JsonObject;
 
@@ -13,4 +13,8 @@ public class SlackType {
         this.json = jsonObject;
     }
 
+    @Override
+    public String toString() {
+        return json.toString();
+    }
 }

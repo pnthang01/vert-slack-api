@@ -96,7 +96,7 @@ public class SlackChannelsImpl implements SlackChannels {
         if (null != excludeArchived) req.setQueryParam("exclude_archived", excludeArchived.toString());
         if (null != excludeMembers) req.setQueryParam("exclude_members", excludeMembers.toString());
         if (null != limit) req.setQueryParam("limit", limit.toString());
-        sendAnReceivedMulti(req, "channels", handler, Channel.class);
+        sendAndReceivedMulti(req, "channels", handler, Channel.class);
     }
 
     @Override

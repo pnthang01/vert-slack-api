@@ -1,5 +1,6 @@
 package com.etybeno.vert.slack.type;
 
+import com.etybeno.vert.slack.SlackType;
 import io.vertx.core.json.JsonObject;
 
 /**

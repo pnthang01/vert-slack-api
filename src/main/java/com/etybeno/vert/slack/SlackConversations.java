@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by thangpham on 10/08/2018.
  */
-public interface SlackConversations extends AbstractSlack {
+public interface SlackConversations extends SlackWebApi {
 
     void archive(String conversationId, Handler<AsyncResult<Void>> handler);
 

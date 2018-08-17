@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by thangpham on 13/08/2018.
  */
-public interface SlackUsers extends AbstractSlack {
+public interface SlackUsers extends SlackWebApi {
 
     void conversations(String cursor, Boolean excludeArchived, Integer limit, List<String> types, String userId,
                        Handler<AsyncResult<Multi<Conversation>>> handler);

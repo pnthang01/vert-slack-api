@@ -1,5 +1,6 @@
 package com.etybeno.vert.slack.type;
 
+import com.etybeno.vert.slack.SlackType;
 import io.vertx.core.json.JsonObject;
 
 /**
@@ -25,5 +26,10 @@ public class Message extends SlackType {
 
     public String getTs() {
         return json.getString("ts");
+    }
+
+    @Override
+    public String toString() {
+        return json.toString();
     }
 }

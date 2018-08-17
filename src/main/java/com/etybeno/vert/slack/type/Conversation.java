@@ -1,11 +1,12 @@
 package com.etybeno.vert.slack.type;
 
+import com.etybeno.vert.slack.SlackType;
 import io.vertx.core.json.JsonObject;
 
 /**
  * Created by thangpham on 10/08/2018.
  */
-public class Conversation extends SlackType{
+public class Conversation extends SlackType {
 
     public Conversation(JsonObject jsonObject) {
         super(jsonObject);

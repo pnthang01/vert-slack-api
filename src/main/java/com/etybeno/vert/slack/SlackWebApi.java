@@ -1,7 +1,6 @@
 package com.etybeno.vert.slack;
 
 import com.etybeno.vert.slack.type.Multi;
-import com.etybeno.vert.slack.type.SlackType;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
@@ -16,7 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * Created by thangpham on 11/08/2018.
  */
-public interface AbstractSlack {
+public interface SlackWebApi {
 
     default <T extends SlackType> void sendAndReceiveOne(HttpRequest<Buffer> req, String dataKey,
                                                          Handler<AsyncResult<T>> handler, Class<T> clazz) {

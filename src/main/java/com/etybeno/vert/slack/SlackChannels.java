@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by thangpham on 07/08/2018.
  */
-public interface SlackChannels extends AbstractSlack {
+public interface SlackChannels extends SlackWebApi {
 
     void archive(String channelId, Handler<AsyncResult<Channel>> handler);
 

@@ -7,7 +7,7 @@ import io.vertx.core.Handler;
 /**
  * Created by thangpham on 11/08/2018.
  */
-public interface SlackChat extends AbstractSlack {
+public interface SlackChat extends SlackWebApi {
 
     void delete(String channelId, String ts, Boolean asUser, Handler<AsyncResult<Void>> handler);
 
