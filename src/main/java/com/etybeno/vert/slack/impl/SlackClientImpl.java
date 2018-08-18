@@ -18,8 +18,6 @@ public class SlackClientImpl implements SlackClient {
 
     private Vertx vertx;
     private SlackOptions options;
-
-
     private WebClient webClient;
     private HttpClient httpClient;
 

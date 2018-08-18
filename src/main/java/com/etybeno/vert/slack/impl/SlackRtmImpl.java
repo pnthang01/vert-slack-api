@@ -19,9 +19,7 @@ import io.vertx.ext.web.client.WebClient;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -248,8 +246,6 @@ public class SlackRtmImpl implements SlackRtm {
             websocket.writeFinalTextFrame(messageObject.encode());
         }
     }
-
-
 
     private synchronized void handleMessage(JsonObject messageObj) {
         if (messageHandler != null) {
